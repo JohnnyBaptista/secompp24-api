@@ -33,14 +33,14 @@ export class LoginController {
   @HttpCode(200)
   async login(
     @Body() { username, password }: { username: string; password: string },
-  ): Promise<string> {
+  ): Promise<User> {
     const user = users.find(
       (user) => user.username === username && user.password === password,
     );
     if (!user) {
       throw new UnauthorizedException('Invalid credentials');
     }
-    return `User ${username} logged in successfully`;
+    return user;
   }
 
   @Post('signUp')
